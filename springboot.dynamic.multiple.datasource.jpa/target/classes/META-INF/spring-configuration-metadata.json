@@ -1,0 +1,22 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.example.springboot.config.impl.AuthorConfig",
+      "name": "cc.author",
+      "type": "com.example.springboot.config.impl.AuthorConfig"
+    },
+    {
+      "sourceType": "com.example.springboot.config.DataSourceSlavePrefix",
+      "name": "datasource.slave",
+      "type": "com.example.springboot.config.DataSourceSlavePrefix"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.example.springboot.config.DataSourceSlavePrefix",
+      "name": "datasource.slave.prefix",
+      "type": "java.lang.String"
+    }
+  ]
+}

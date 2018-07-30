@@ -1,10 +1,12 @@
 package com.example.springboot.config.validator;
 
 import com.example.springboot.study.language.bean.ScStudentBean;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+@Component
 public class ScStudentBeanValidator implements Validator {
 
     @Override

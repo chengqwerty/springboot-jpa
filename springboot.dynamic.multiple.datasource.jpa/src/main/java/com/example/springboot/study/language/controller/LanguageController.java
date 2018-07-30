@@ -24,14 +24,23 @@ import java.util.List;
 @RequestMapping("language")
 public class LanguageController {
 
-//    /**
-//     * 绑定验证器
-//     * @param webDataBinder
-//     */
-//    @InitBinder
-//    protected void initBinder(WebDataBinder webDataBinder) {
-//        webDataBinder.setValidator(new ScStudentBeanValidator());
-//    }
+    @Autowired
+    ScStudentBeanValidator scStudentBeanValidator;
+
+    /**
+     * 绑定验证器
+     * Annotaion JSR-303与spring 的Validator接口不要一起使用
+     * @param webDataBinder
+     */
+    @InitBinder
+    protected void initBinder(WebDataBinder webDataBinder) {
+        // 通过判断类型加载验证器，每次请求都会执行这个方法
+        if(scStudentBeanValidator.supports(webDataBinder.getTarget().getClass())){
+            webDataBinder.addValidators(scStudentBeanValidator);
+        }else{
+            // webDataBinder.addValidators(teacherValidator);
+        }
+    }
 
     @Autowired
     private DataSourceSlavePrefix dataSourceSlavePrefix;

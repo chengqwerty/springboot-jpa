@@ -1,6 +1,5 @@
-package com.example.springboot.config;
+package com.example.springboot.config.datasource;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 

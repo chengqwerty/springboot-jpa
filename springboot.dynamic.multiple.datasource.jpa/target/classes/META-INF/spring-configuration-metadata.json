@@ -7,14 +7,14 @@
       "type": "com.example.springboot.config.impl.AuthorConfig"
     },
     {
-      "sourceType": "com.example.springboot.config.DataSourceSlavePrefix",
+      "sourceType": "com.example.springboot.config.datasource.DataSourceSlavePrefix",
       "name": "datasource.slave",
-      "type": "com.example.springboot.config.DataSourceSlavePrefix"
+      "type": "com.example.springboot.config.datasource.DataSourceSlavePrefix"
     }
   ],
   "properties": [
     {
-      "sourceType": "com.example.springboot.config.DataSourceSlavePrefix",
+      "sourceType": "com.example.springboot.config.datasource.DataSourceSlavePrefix",
       "name": "datasource.slave.prefix",
       "type": "java.lang.String"
     }

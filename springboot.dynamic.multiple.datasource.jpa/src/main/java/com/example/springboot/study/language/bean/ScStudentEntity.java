@@ -1,8 +1,11 @@
 package com.example.springboot.study.language.bean;
 
+import com.example.springboot.config.validator.groups.Delete;
+import com.example.springboot.config.validator.groups.Insert;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.Objects;
 
@@ -29,6 +32,7 @@ public class ScStudentEntity {
 
     @Basic
     @Column(name = "stu_name")
+    @NotNull(message = "名字不能为空", groups = {Insert.class})
     public String getStuName() {
         return stuName;
     }

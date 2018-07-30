@@ -1,15 +1,15 @@
 package com.example.springboot.study.language.controller;
 
 import com.example.springboot.config.datasource.DataSourceSlavePrefix;
+import com.example.springboot.config.exception.ParameterValidationException;
 import com.example.springboot.config.exception.QueryException;
 import com.example.springboot.config.exception.SaveException;
-import com.example.springboot.config.exception.ValidationException;
 import com.example.springboot.config.validator.ScStudentBeanValidator;
+import com.example.springboot.config.validator.groups.Insert;
 import com.example.springboot.study.language.bean.ScStudentBean;
 import com.example.springboot.study.language.bean.ScStudentEntity;
 import com.example.springboot.study.language.service.LanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
@@ -24,14 +24,14 @@ import java.util.List;
 @RequestMapping("language")
 public class LanguageController {
 
-    /**
-     * 绑定验证器
-     * @param webDataBinder
-     */
-    @InitBinder
-    protected void initBinder(WebDataBinder webDataBinder) {
-        webDataBinder.setValidator(new ScStudentBeanValidator());
-    }
+//    /**
+//     * 绑定验证器
+//     * @param webDataBinder
+//     */
+//    @InitBinder
+//    protected void initBinder(WebDataBinder webDataBinder) {
+//        webDataBinder.setValidator(new ScStudentBeanValidator());
+//    }
 
     @Autowired
     private DataSourceSlavePrefix dataSourceSlavePrefix;
@@ -72,14 +72,13 @@ public class LanguageController {
 
     /**
      * 使用primary datasource 保存新student
-     * @param studentName
+     * @param scStudentEntity
      * @return
      */
     @RequestMapping("/postGre/saveStudent")
-    public ScStudentEntity postGreSaveStudent(String studentName) throws SaveException {
-        ScStudentEntity scStudentEntity = null;
+    public ScStudentEntity postGreSaveStudent(@Validated({Insert.class})ScStudentEntity scStudentEntity) throws SaveException {
         try {
-            scStudentEntity = languageService.postGreSaveStudent(studentName);
+            ScStudentEntity newScStudentEntity = languageService.postGreSaveStudent(scStudentEntity);
         } catch (Exception e) {
             e.printStackTrace();
             throw new SaveException();
@@ -94,12 +93,12 @@ public class LanguageController {
      * @param scStudentBean
      * @return
      */
-    @RequestMapping(value = "/oracle/saveStudent", produces = "text/html;charset=UTF-8")
-    public ScStudentBean oracleSaveStudent(@Validated ScStudentBean scStudentBean, BindingResult bindingResult) throws ValidationException {
+    @RequestMapping(value = "/oracle/saveStudent")
+    public ScStudentBean oracleSaveStudent(@Validated ScStudentBean scStudentBean, BindingResult bindingResult) throws ParameterValidationException {
         if (bindingResult.hasErrors()) {
             FieldError fieldError = bindingResult.getFieldError();
             String errorMessage = fieldError.getDefaultMessage();
-            throw new ValidationException(errorMessage);
+            throw new ParameterValidationException(errorMessage);
         }
         ScStudentBean newScStudentBean = languageService.oracleSaveStudent(scStudentBean);
         return newScStudentBean;

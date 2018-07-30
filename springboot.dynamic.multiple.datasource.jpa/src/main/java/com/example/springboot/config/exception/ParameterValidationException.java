@@ -1,14 +1,14 @@
 package com.example.springboot.config.exception;
 
-public class ValidationException extends Exception {
+public class ParameterValidationException extends Exception {
 
     private static final String MESSAGE = "参数验证失败，请检查.";
 
-    public ValidationException() {
+    public ParameterValidationException() {
         super(MESSAGE);
     }
 
-    public ValidationException(String message) {
+    public ParameterValidationException(String message) {
         super(MESSAGE + System.getProperty("line.separator") + message);
     }
 }

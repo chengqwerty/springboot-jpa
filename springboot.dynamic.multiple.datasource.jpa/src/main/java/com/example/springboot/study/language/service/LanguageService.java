@@ -41,11 +41,7 @@ public class LanguageService {
     }
 
     @Transactional
-    public ScStudentEntity postGreSaveStudent(String studentName) {
-        ScStudentEntity scStudentEntity = new ScStudentEntity();
-        scStudentEntity.setAge(18);
-        scStudentEntity.setStuName(studentName);
-        scStudentEntity.setGid(2);
+    public ScStudentEntity postGreSaveStudent(ScStudentEntity scStudentEntity) {
         ScStudentEntity newScStudentEntity = scStudentEntityRepository.save(scStudentEntity);
         int a = 1/0; // 手动抛出异常，测试spring事务处理
         return newScStudentEntity;

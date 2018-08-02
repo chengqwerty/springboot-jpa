@@ -1,0 +1,21 @@
+-- auto-generated definition
+create table sc_grade
+(
+  gid      integer not null
+    constraint sc_grade_pkey
+    primary key,
+  gra_name varchar(100),
+  gra_type integer
+);
+
+-- auto-generated definition
+create table sc_student
+(
+  sid      integer not null
+    constraint sc_student_pkey
+    primary key,
+  stu_name varchar(100),
+  gid      integer,
+  age      integer,
+  birthday date
+);
